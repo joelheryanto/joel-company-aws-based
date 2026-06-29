@@ -1,0 +1,5 @@
+# Read more about SSH config files: https://linux.die.net/man/5/ssh_config
+Host joel-web-server
+    HostName 16.78.28.215
+    User ec2-user
+    IdentityFile "D:/Joel/Cloud/AWS/joel company/joel-company.pem"
