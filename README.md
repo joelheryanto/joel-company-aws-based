@@ -50,6 +50,9 @@ icacls.exe .\joel-company.pem /remove "NT AUTHORITY\Authenticated Users"
 sudo dnf install -y php php-fpm
 sudo systemctl start php-fpm
 sudo systemctl enable php-fpm
+
+- Terjadi error saat mau deploy ketika web tidak menampilkan hasil akhir hanya menampilkan tulisan it works, sebetulnya hasil sudah bagus karna koneksi terhubung antar 2 tempat, namun html yang dibuat tidak bisa ditampilkan. dilakukan pengecekan dan pemasangan php php-fpm.
 ![Pengecekan dan pemasangan php php-fpm, disebelumnya terdapat stuck website apache menampilkan "it works"](img/sebelum-instal-php-fpm.png)
 ![Sesudah dilakukan install php php-fpm](img/php-fpm-installed-restart-httpd.png)
+- Hasil akhir
 ![Hasil akhir dicoba pada website dengan ip address tidak pakai jalur pintas (menambahkan index pada akhir ip)](img/web-tampil.png)
