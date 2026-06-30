@@ -1,63 +1,51 @@
-# 🌐 AWS Cloud Infrastructure: Deploys Apache Web Server & PHP Runtime on EC2
+# End-to-End AWS Infrastructure & Web Deployment
 
-Repository ini mendokumentasikan proses *end-to-end* pembangunan infrastruktur server web dinamis di atas layanan cloud Amazon Web Services (AWS). Proyek ini dirancang sebagai implementasi praktis arsitektur jaringan, manajemen keamanan akses, serta pemecahan masalah (*real-world troubleshooting*) pada lingkungan Linux server.
-
-##  Ringkasan Proyek
-- Penyedia Cloud: Amazon Web Services (AWS)
-- Layanan Utama: Amazon EC2 (Elastic Compute Cloud)
-- Sistem Operasi Server: Amazon Linux 2023
-- Web Stack: Apache HTTP Server (httpd) & PHP Runtime (PHP-FPM)
-- Tujuan: Menyediakan halaman web dinamis "Joel Company" yang menampilkan status server secara *real-time*.
+Proyek ini mendokumentasikan langkah-langkah pembangunan infrastruktur jaringan cloud di Amazon Web Services (AWS) hingga tahap *deployment* aplikasi web dinamis berbasis PHP secara aman.
 
 ---
 
-## Kronologi & Dokumentasi Masalah (*Troubleshooting Logs*)
+## Scene 1: AWS Core Infrastructure Provisioning
 
-Sebuah perjalanan *deployment* tidak pernah lepas dari tantangan. Berikut adalah ringkasan kendala teknis yang berhasil diidentifikasi dan diselesaikan selama proses pembangunan infrastruktur ini:
+Pada tahap pertama ini, seluruh komponen jaringan dasar dan komputasi di AWS disiapkan untuk membangun pondasi server yang terisolasi dan aman.
 
-### Scene 1: Mengatasi Konflik Hak Akses Kunci Privat SSH (.pem) di Windows
+### 1. Konfigurasi Jaringan & VM
+- Pembangunan Virtual Private Cloud (VPC) kustom sebagai ruang terisolasi.
+- Pengaturan Subnet Publik agar server dapat menjangkau internet.
+- Peluncuran Amazon EC2 Instance dengan sistem operasi Amazon Linux 2023.
 
-Saat mencoba melakukan koneksi remote via SSH menggunakan kunci privat joel-company.pem, sistem menolak koneksi dengan pesan eror fatal keamanan.
+### Dokumentasi Arsitektur AWS:
+![Pembuatan EC2 di AWS Console](img/aws-ec2-instance.png)
+![Pembuatan VPC di AWS Console](img/aws-vpc.png)
+![Pembuatan Subnet di AWS Console](img/aws-subnet-awal.png)
+![Pembuatan IGW, Route Table, Security Group di AWS Console](img/aws-igw.png)(img/aws-route-table.png)(img/aws-sg.png)
 
-- Identifikasi Masalah: Eror WARNING: UNPROTECTED PRIVATE KEY FILE! dan Permission denied (publickey). Protokol OpenSSH mendeteksi bahwa file .pem memiliki hak akses yang terlalu terbuka (*too open*) di sistem operasi Windows, sehingga sistem mengabaikan kunci tersebut demi keamanan.
-- Resolusi Masalah: Menggunakan Windows PowerShell dengan utilitas icacls.exe untuk mematikan fitur pewarisan hak akses (*inheritance*) dan menghapus hak akses pengguna lain (seperti *Authenticated Users* atau *BUILTIN\Users*), menyisakan hak akses eksklusif hanya untuk akun pengguna lokal aktif.
+---
 
+## Scene 2: Secure Remote Access & SSH Connection
+
+Setelah infrastruktur cloud aktif, tahap berikutnya adalah membangun koneksi remote yang aman dari perangkat lokal menggunakan protokol OpenSSH.
+
+### 1. Masalah Keamanan Kunci Privat (.pem)
+Saat mencoba melakukan koneksi awal, SSH menolak kunci karena hak akses file di Windows terlalu terbuka (*unprotected private key file*).
+
+### 2. Resolusi Hak Akses via PowerShell
+Menggunakan utilitas icacls.exe untuk mengunci berkas .pem agar hanya bisa dibaca secara eksklusif oleh pengguna aktif:
 `powershell
-# Mematikan pewarisan hak akses pada file kunci privat
 icacls.exe .\joel-company.pem /inheritance:d
-
-# Menghapus hak akses kelompok pengguna yang terlalu luas
 icacls.exe .\joel-company.pem /remove "NT AUTHORITY\Authenticated Users"
-icacls.exe .\joel-company.pem /remove "BUILTIN\Users"
 
-### Scene 2: Mengonfigurasi Jembatan Web Server & Aktivasi PHP-FPM
-​Setelah berhasil masuk ke server via SSH dan mengaktifkan Apache, halaman web belum mampu mengeksekusi skrip dinamis PHP dan sempat tertahan pada halaman default.
-# ​Identifikasi Masalah: 
-1. Perintah awal menghasilkan eror Unit php-fpm.service not found, menandakan bahwa pemroses PHP (PHP Runtime) belum terpasang di ekosistem Amazon Linux 2023.
-2. Browser sempat menampilkan halaman teks statis default Apache "It works!" karena konfigurasi bawaan AWS menimpa file index kustom.
-​Resolusi Masalah: Melakukan instalasi paket PHP dan PHP-FPM menggunakan manajer paket dnf, mengaktifkan layanannya di latar belakang, serta mengamankan konfigurasi welcome Apache.
 
-# 1. Instalasi PHP dan dependensi pemroses proses PHP
+## Scene 3: Web Stack Configuration & Application Deployment
+
+​Fase akhir adalah mengubah EC2 Instance kosong menjadi web server fungsional yang mampu melayani traffic publik.
+
+​1. Pemasangan Apache & PHP-FPM
+
+​Melakukan instalasi runtime environment agar server mampu mengeksekusi skrip backend PHP secara dinamis:
+
 sudo dnf install -y php php-fpm
-
-# 2. Menjalankan dan mengaktifkan service PHP-FPM agar otomatis berjalan saat boot
 sudo systemctl start php-fpm
 sudo systemctl enable php-fpm
-
-# 3. Memindahkan konfigurasi default welcome Apache agar memprioritaskan index kustom
-sudo mv /etc/httpd/conf.d/welcome.conf /etc/httpd/conf.d/welcome.conf.bak
-
-# 4. Melakukan restart pada Apache Web Server
-sudo systemctl restart httpd
-
-### Scene 3: Resolusi Masalah Penamaan File (Typo Detection)
-​Setelah melakukan konfigurasi runtime, server sempat menampilkan halaman *Index of / * yang memperlihatkan struktur folder internal, alih-alih mengeksekusi aplikasi utama.
-# ​Identifikasi Masalah: Terjadi kesalahan pengetikan (typo) pada nama file di direktori /var/www/html/. File terbuat dengan nama inddex.php (double 'd'). Akibatnya, Apache tidak mengenali file tersebut sebagai pintu gerbang utama (DirectoryIndex) yang secara default mencari file bernama tepat index.php.
-​Resolusi Masalah: Mengubah nama file (rename) di dalam terminal Linux menggunakan perintah mv:
-sudo mv inddex.php index.php
-
-### Hasil Akhir (Final Deployment)
-​Setelah seluruh rangkaian troubleshooting selesai, infrastruktur berhasil berjalan dengan sempurna:
-# ​Akses URL: Dapat diakses secara publik menggunakan IP Publik EC2 Instance.
-# ​Konektivitas Visual: Halaman web menampilkan identitas Joel Company - AWS CLOUD SERVER dengan indikator status ONLINE.
-# ​Eksekusi Komponen Backend: Script PHP berhasil dieksekusi secara dinamis dengan menampilkan waktu operasional server lokal secara akurat dan berubah setiap kali halaman dimuat ulang (refresh).
+![Pengecekan dan pemasangan php php-fpm, disebelumnya terdapat stuck website apache menampilkan "it works"](img/sebelum-instal-php-fpm.png)
+![Sesudah dilakukan install php php-fpm](img/php-fpm-installed-restart-httpd.png)
+![Hasil akhir dicoba pada website dengan ip address tidak pakai jalur pintas (menambahkan index pada akhir ip)](img/web-tampil.png)
