@@ -9,15 +9,19 @@ Proyek ini mendokumentasikan langkah-langkah pembangunan infrastruktur jaringan 
 Pada tahap pertama ini, seluruh komponen jaringan dasar dan komputasi di AWS disiapkan untuk membangun pondasi server yang terisolasi dan aman.
 
 ### 1. Konfigurasi Jaringan & VM
-- Pembangunan Virtual Private Cloud (VPC) kustom sebagai ruang terisolasi.
-- Pengaturan Subnet Publik agar server dapat menjangkau internet.
-- Peluncuran Amazon EC2 Instance dengan sistem operasi Amazon Linux 2023.
-
-### Dokumentasi Arsitektur AWS:
-![Pembuatan EC2 di AWS Console](img/aws-ec2-instance.png)
+- Membuat Virtual Private Cloud (VPC) kustom sebagai ruang terisolasi.
 ![Pembuatan VPC di AWS Console](img/aws-vpc.png)
+
+- Mengatur Subnet Publik agar server dapat menjangkau internet.
 ![Pembuatan Subnet di AWS Console](img/aws-subnet-awal.png)
-![Pembuatan IGW, Route Table, Security Group di AWS Console](img/aws-igw.png)(img/aws-route-table.png)(img/aws-sg.png)
+
+- Meluncurkan Amazon EC2 Instance dengan sistem operasi Amazon Linux 2023.
+![Pembuatan EC2 di AWS Console](img/aws-ec2-instance.png)
+
+- Merancang Internet Gateway, Route Table, Security Group di AWS Console
+![Pembuatan IGW di AWS Console](img/aws-igw.png)
+![Pembuatan Route Table di AWS Console](img/aws-route-table.png)
+![Pembuatan Security Group di AWS Console](img/aws-sg.png)
 
 ---
 
