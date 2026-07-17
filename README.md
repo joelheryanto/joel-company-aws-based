@@ -87,6 +87,7 @@ Alih-alih menyimpan *Access Key* secara statis di dalam kode (yang berisiko boco
 Kami memverifikasi bahwa EC2 telah mengadopsi identitas IAM Role tersebut melalui AWS CLI:
 
 1. Verifikasi Identitas:
+
 `bash
 aws sts get-caller-identity
 aws s3 ls (menunjukan koneksi lancar tidak ada error "accessdenied")
