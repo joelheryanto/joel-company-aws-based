@@ -89,4 +89,5 @@ Kami memverifikasi bahwa EC2 telah mengadopsi identitas IAM Role tersebut melalu
 1. Verifikasi Identitas:
 `bash
 aws sts get-caller-identity
-aws s3 ls (menunjukan koneksi lancar tidak ada error "accessdenied")(img/aws-iam-test.png)
+aws s3 ls (menunjukan koneksi lancar tidak ada error "accessdenied")
+![penunjukan pembuatan file dan hasil test iam lewat vscode](img/aws-iam-test.png)
