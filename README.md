@@ -104,14 +104,14 @@ Fase ini memisahkan lapisan data (*Data Layer*) dari Web Server ke Amazon RDS My
 ## ⚙️ Implementasi
 1. Pembuatan kustom DB Subnet Group dengan 2 Availability Zones.
 Melakukan upgrade subnet dengan menambahkan menjadi 2 AZ guna membuat DB Subnet Group. Walaupun menggunakan free-tier AWS tetap mewajibkan VPC memiliki minimal 2 subnet di 2 AZ yang berbeda.
-![Prosespembuatansubnet-2-AZ](img/2-subnet.png)
+![Prosespembuatansubnet-2-AZ](image-screenshot/rds/2-subnet.png)
 
 2. Provisioning RDS MySQL Engine (Free Tier).
-![Pengolahanrds](img/rds1.png)
-![pengolahanrds2](img/rds2.png)
+![Pengolahanrds](image-screenshot/rds/rds1.png)
+![pengolahanrds2](image-screenshot/rds/rds2.png)
 
 3. Instalasi mariadb105 dan php-mysqli pada EC2 untuk mendukung konektivitas data.
-![penginstalanmariadb](img/install-mariadb.png)
+![penginstalanmariadb](image-screenshot/rds/install-mariadb.png)
 
 ## 🔍 Verifikasi & Validasi
 
@@ -119,9 +119,9 @@ Melakukan upgrade subnet dengan menambahkan menjadi 2 AZ guna membuat DB Subnet 
 Menghubungkan antara EC2 ke RDS dengan koneksi privat
 ``bash
 mysql -h <ENDPOINT_RDS> -u admin -p
-![prosespenggabungan](img/ec2-ke-rds.png)
-![hasilakhir](img/sukses-ec2-rds.png)
+![prosespenggabungan](image-screenshot/rds/ec2-ke-rds.png)
+![hasilakhir](image-screenshot/rds/sukses-ec2-rds.png)
 
 2. Integrasi Web Application (PHP):
 Akses halaman http://<IP_EC2>/db-test.php menunjukkan keberhasilan query data secara real-time dari RDS MySQL:
-![webterhubung](img/finish.png)
+![webterhubung](image-screenshot/rds/finish.png)
