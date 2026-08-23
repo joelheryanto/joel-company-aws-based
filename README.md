@@ -7,8 +7,8 @@ Repositori ini mendokumentasikan transformasi arsitektur cloud Joel Company dari
     *   *Status: Completed* | VPC, EC2, SSH Access, Apache & PHP Deployment.
 *   [Fase 2: Identity & Security (IAM)]
     *   *Status: Completed* | IAM Instance Profiles & Secure API Access.
-*   Fase 3: Separasi Data & Database Relasional (RDS)
-    *   *Status: Planned*
+*   [Fase 3: Separasi Data & Database Relasional (RDS)]
+    *   *Status: Completed*
 *   Fase 4: Backup & Lifecycle Management (S3/EBS)
     *   *Status: Planned*
 *   Fase 5: Monitoring & Alerting (CloudWatch/SNS)
