@@ -92,3 +92,36 @@ aws sts get-caller-identity
 aws s3 ls (menunjukan koneksi lancar tidak ada error "accessdenied")
 ```
 ![penunjukan pembuatan file dan hasil test iam lewat vscode](img/aws-iam-test.png)
+
+# Fase 3: Separasi Data & Database Relasional (RDS)
+
+Fase ini memisahkan lapisan data (*Data Layer*) dari Web Server ke Amazon RDS MySQL untuk menciptakan arsitektur 3-Tier yang aman dan *scalable*.
+
+## 🏗️ Topologi Keamanan Database
+- Subnet: RDS diletakkan dalam Subnet Privat (2 Availability Zones) tanpa akses IP Publik.
+- **Security Group (rds-joelcompany-sg):** Hanya menerima *inbound traffic* pada port 3306 (MySQL) yang bersumber dari ID Security Group Web Server (joel-web-sg).
+
+## ⚙️ Implementasi
+1. Pembuatan kustom DB Subnet Group dengan 2 Availability Zones.
+Melakukan upgrade subnet dengan menambahkan menjadi 2 AZ guna membuat DB Subnet Group. Walaupun menggunakan free-tier AWS tetap mewajibkan VPC memiliki minimal 2 subnet di 2 AZ yang berbeda.
+![Prosespembuatansubnet-2-AZ](img/2-subnet.png)
+
+2. Provisioning RDS MySQL Engine (Free Tier).
+![Pengolahanrds](img/rds1.png)
+![pengolahanrds2](img/rds2.png)
+
+3. Instalasi mariadb105 dan php-mysqli pada EC2 untuk mendukung konektivitas data.
+![penginstalanmariadb](img/install-mariadb.png)
+
+## 🔍 Verifikasi & Validasi
+
+1. Verifikasi CLI dari EC2 ke RDS:**
+Menghubungkan antara EC2 ke RDS dengan koneksi privat
+``bash
+mysql -h <ENDPOINT_RDS> -u admin -p
+![prosespenggabungan](img/ec2-ke-rds.png)
+![hasilakhir](img/sukses-ec2-rds.png)
+
+2. Integrasi Web Application (PHP):
+Akses halaman http://<IP_EC2>/db-test.php menunjukkan keberhasilan query data secara real-time dari RDS MySQL:
+![webterhubung](img/finish.png)
