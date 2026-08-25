@@ -16,4 +16,4 @@ Verifikasi Identitas:
 aws sts get-caller-identity
 aws s3 ls (menunjukan koneksi lancar tidak ada error "accessdenied")
 ```
-![penunjukan pembuatan file dan hasil test iam lewat vscode](img/aws-iam-test.png)
+![penunjukan pembuatan file dan hasil test iam lewat vscode](../img/aws-iam-test.png)

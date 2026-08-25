@@ -5,18 +5,18 @@ Pada tahap pertama ini, seluruh komponen jaringan dasar dan komputasi di AWS dis
 
 ### 1. Konfigurasi Jaringan & VM
 - Membuat Virtual Private Cloud (VPC) kustom sebagai ruang terisolasi.
-![Pembuatan VPC di AWS Console](img/aws-vpc.png)
+![Pembuatan VPC di AWS Console](../img/aws-vpc.png)
 
 - Mengatur Subnet Publik agar server dapat menjangkau internet.
-![Pembuatan Subnet di AWS Console](img/aws-subnet-awal.png)
+![Pembuatan Subnet di AWS Console](../img/aws-subnet-awal.png)
 
 - Meluncurkan Amazon EC2 Instance dengan sistem operasi Amazon Linux 2023.
-![Pembuatan EC2 di AWS Console](img/aws-ec2-instance.png)
+![Pembuatan EC2 di AWS Console](../img/aws-ec2-instance.png)
 
 - Merancang Internet Gateway, Route Table, Security Group di AWS Console
-![Pembuatan IGW di AWS Console](img/aws-igw.png)
-![Pembuatan Route Table di AWS Console](img/aws-route-table.png)
-![Pembuatan Security Group di AWS Console](img/aws-sg.png)
+![Pembuatan IGW di AWS Console](../img/aws-igw.png)
+![Pembuatan Route Table di AWS Console](../img/aws-route-table.png)
+![Pembuatan Security Group di AWS Console](../img/aws-sg.png)
 
 ---
 
@@ -47,7 +47,7 @@ sudo systemctl start php-fpm
 sudo systemctl enable php-fpm
 
 - Terjadi error saat mau deploy ketika web tidak menampilkan hasil akhir hanya menampilkan tulisan it works, sebetulnya hasil sudah bagus karna koneksi terhubung antar 2 tempat, namun html yang dibuat tidak bisa ditampilkan. dilakukan pengecekan dan pemasangan php php-fpm.
-![Pengecekan dan pemasangan php php-fpm, disebelumnya terdapat stuck website apache menampilkan "it works"](img/sebelum-instal-php-fpm.png)
-![Sesudah dilakukan install php php-fpm](img/php-fpm-installed-restart-httpd.png)
+![Pengecekan dan pemasangan php php-fpm, disebelumnya terdapat stuck website apache menampilkan "it works"](../img/sebelum-instal-php-fpm.png)
+![Sesudah dilakukan install php php-fpm](../img/php-fpm-installed-restart-httpd.png)
 - Hasil akhir
-![Hasil akhir dicoba pada website dengan ip address tidak pakai jalur pintas (menambahkan index pada akhir ip)](img/web-tampil.png)
+![Hasil akhir dicoba pada website dengan ip address tidak pakai jalur pintas (menambahkan index pada akhir ip)](../img/web-tampil.png)

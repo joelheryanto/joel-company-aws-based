@@ -13,10 +13,10 @@ Fase ini berfokus pada strategi Disaster Recovery (DR) dan efisiensi biaya penyi
 ### Tangkapan Layar Dokumentasi
 
 Pembuatan Snapshot manual yang dilakukan tanpa memakai DLM.
-![EBS Manual Snapshot](image-screenshot/ebs/snapshot-manual.png)
+![EBS Manual Snapshot](../image-screenshot/ebs/snapshot-manual.png)
 
 Proses custom mengisi aturan pada DLM.
-![DLM Policy Setup](image-screenshot/ebs/proses-lifescycle.png)
+![DLM Policy Setup](../image-screenshot/ebs/proses-lifescycle.png)
 
 Hasil akhir DLM siap pakai.
-![DLM Policy Setup Finis](image-screenshot/ebs/sukses-pakai-lifecycle.png)
+![DLM Policy Setup Finis](../image-screenshot/ebs/sukses-pakai-lifecycle.png)
