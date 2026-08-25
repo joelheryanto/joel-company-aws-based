@@ -111,7 +111,9 @@ Melakukan upgrade subnet dengan menambahkan menjadi 2 AZ guna membuat DB Subnet 
 ![pengolahanrds2](image-screenshot/rds/rds2.png)
 
 3. Instalasi mariadb105 dan php-mysqli pada EC2 untuk mendukung konektivitas data.
-![penginstalanmariadb](image-screenshot/rds/install-mariadb.png)
+Proses instal mariadb setelah berhasil login via ssh
+![penginstalanmariadb](image-screenshot/rds/ssh-install-mariadb)
+![installmariadb](image-screenshot/rds/sukses-install-mariadb)
 
 ## 🔍 Verifikasi & Validasi
 
