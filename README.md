@@ -9,8 +9,8 @@ Repositori ini mendokumentasikan transformasi arsitektur cloud Joel Company dari
     *   *Status: Completed* | IAM Instance Profiles & Secure API Access.
 *   [Fase 3: Separasi Data & Database Relasional (RDS)]
     *   *Status: Completed*
-*   Fase 4: Backup & Lifecycle Management (S3/EBS)
-    *   *Status: Planned*
+*   [Fase 4: Backup & Lifecycle Management (S3/EBS)]
+    *   *Status: Completed* | Automated EBS Lifecycle (DLM), Manual EBS Snapshots, RDS Automated Backup & Manual DB Snapshot.
 *   Fase 5: Monitoring & Alerting (CloudWatch/SNS)
     *   *Status: Planned*
 *   Fase 6: High Availability (Load Balancer & Multi-AZ)
