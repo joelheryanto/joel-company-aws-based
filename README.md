@@ -11,8 +11,8 @@ Repositori ini mendokumentasikan transformasi arsitektur cloud Joel Company dari
     *   *Status: Completed*
 *   [Fase 4: Backup & Lifecycle Management (S3/EBS)]
     *   *Status: Completed* | Automated EBS Lifecycle (DLM), Manual EBS Snapshots, RDS Automated Backup & Manual DB Snapshot.
-*   Fase 5: Monitoring & Alerting (CloudWatch/SNS)
-    *   *Status: Planned*
+*  [Fase 5: Monitoring & Alerting (CloudWatch/SNS)]
+    *   *Status: Completed* | Real-time EC2 CPU Monitoring, Cloudwatch Alarm (Threshold >=70%), Automated SNS Email Alerts, Stress Test Validation.
 *   Fase 6: High Availability (Load Balancer & Multi-AZ)
     *   *Status: Planned*
 
