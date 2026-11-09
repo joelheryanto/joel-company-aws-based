@@ -20,3 +20,12 @@ Proses custom mengisi aturan pada DLM.
 
 Hasil akhir DLM siap pakai.
 ![DLM Policy Setup Finis](../image-screenshot/ebs/sukses-pakai-lifecycle.png)
+
+## 2. RDS Database Backup & Recovery Strategy
+
+### Implementasi
+- Automated Backups: Mengaktifkan backup otomatis harian dengan *Point-in-Time Restore* (PITR) enabled.
+- Manual DB Snapshot: Membuat snapshot manual sebagai *baseline backup* sebelum perubahan skema database major.
+
+### Tangkapan Layar Dokumentasi
+![RDS Manual Snapshot](../image-screenshot/rds/rds-snapshot-success.png)
